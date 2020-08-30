@@ -5,8 +5,6 @@ export const trackArrayChanges = () => {
   const myArray = [];
   const arraySubject: any = new Subject();
 
-  console.log(arraySubject);
-
   const pushToArray = function (item: any) {
     myArray.push(item);
     arraySubject.next(item);
@@ -14,6 +12,7 @@ export const trackArrayChanges = () => {
 
   arraySubject.subscribe(console.log);
 
-  pushToArray(2);
+  setTimeout(() => pushToArray("hello"), 1000);
   setTimeout(() => pushToArray("hello again"), 2000);
+  setTimeout(() => pushToArray("hello again"), 4000);
 };
