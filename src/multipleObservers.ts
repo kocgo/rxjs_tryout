@@ -14,6 +14,9 @@ export const multipleObservers = () => {
     () => addItem("completed, no more iterations")
   );
 
+  // For Child Observer
+  // observer1.add(observer2);
+
   const observer2 = myObservable$.subscribe(
     // Next
     (val: any) => addItem("I am observer 2 " + val)
