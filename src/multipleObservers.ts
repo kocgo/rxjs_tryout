@@ -1,22 +1,29 @@
 import { Observable } from "rxjs";
 
-export const firstObservable = () => {
+export const multipleObservers = () => {
   const myObservable$ = Observable.create((observer: any) => {
-    observer.next("hey");
-    observer.next("hey");
-    observer.next("hey");
-    observer.complete();
-    observer.next("hey");
+    setInterval(() => observer.next("hey"), 2000);
   });
 
-  myObservable$.subscribe(
+  const observer1 = myObservable$.subscribe(
     // Next
-    (x: any) => addItem(x),
+    (val: any) => addItem("I am observer 1 " + val),
     // Error
     (error: any) => console.log(error),
     // Complete
     () => addItem("completed, no more iterations")
   );
+
+  const observer2 = myObservable$.subscribe(
+    // Next
+    (val: any) => addItem("I am observer 2 " + val)
+  );
+
+  // Unsubscribe after 10 seconds
+  setTimeout(() => {
+    observer1.unsubscribe();
+    observer2.unsubscribe();
+  }, 10000);
 
   function addItem(val: any) {
     const node = document.createElement("li");

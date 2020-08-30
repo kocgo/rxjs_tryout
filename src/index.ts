@@ -1,3 +1,3 @@
-import { trackArrayChanges } from "./trackArrayChanges";
+import { multipleObservers } from "./multipleObservers";
 
-trackArrayChanges();
+multipleObservers();
